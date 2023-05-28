@@ -7,6 +7,7 @@ RUN apk update && \
     apk add -f bash \
                build-base \
                git \
+               libc6-compat \
                tzdata \
                postgresql-dev \
                postgresql-client

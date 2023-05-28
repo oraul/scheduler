@@ -12,6 +12,11 @@ services:
       - "3000:3000"
     depends_on:
       - db
+    environment:
+      - SCHEDULER_DATABASE_HOST=db
+      - SCHEDULER_DATABASE_PASSWORD=postgres
+      - SCHEDULER_DATABASE_PORT=5432
+      - SCHEDULER_DATABASE_USERNAME=postgres
 
   db:
     image: postgres:15.3-alpine3.18
