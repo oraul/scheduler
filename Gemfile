@@ -40,6 +40,9 @@ group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri mingw x64_mingw]
 
+  # Our fixture replacement
+  gem 'factory_bot_rails'
+
   # Testing framework
   gem 'rspec-rails'
 
@@ -49,14 +52,9 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'rubocop-rails', require: false
   gem 'rubocop-rspec', require: false
-end
 
-group :test do
   # Easier way to test models
   gem 'shoulda-matchers'
-
-  # Our fixture replacement
-  gem 'factory_bot_rails'
 end
 
 group :development do
