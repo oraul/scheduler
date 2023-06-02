@@ -23,7 +23,7 @@ RSpec.describe '/rooms' do
                  required: %w[id name created_at updated_at]
                }
 
-        let!(:room) { create(:room) }
+        let(:room) { create(:room) }
 
         run_test!
       end
@@ -45,11 +45,9 @@ RSpec.describe '/rooms' do
           { name: "Room #{Time.zone.now}" }
         end
 
-        before do |example|
-          expect { submit_request(example.metadata) }.to change(Room, :count).by(1)
-        end
-
         it 'returns a 201 response' do |example|
+          expect { submit_request(example.metadata) }.to change(Room, :count).by(1)
+
           assert_response_matches_metadata(example.metadata)
         end
       end
@@ -118,7 +116,7 @@ RSpec.describe '/rooms' do
         required: %w[name]
       }
 
-      let!(:id) { create(:room).id }
+      let(:id) { create(:room).id }
 
       response '200', 'room updated' do
         let(:room) do
@@ -144,14 +142,10 @@ RSpec.describe '/rooms' do
       parameter name: :id, in: :path, type: :integer
 
       response '204', 'room deleted' do
-        let!(:id) { create(:room).id }
+        let(:id) { create(:room).id }
 
-        before do |example|
-          expect { submit_request(example.metadata) }.to change(Room, :count).by(-1)
-        end
-
-        it 'returns a 204 response' do |example|
-          assert_response_matches_metadata(example.metadata)
+        run_test! do
+          expect(Room.where(id:)).not_to exist
         end
       end
 
