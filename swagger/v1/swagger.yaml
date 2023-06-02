@@ -136,6 +136,177 @@ paths:
           description: room deleted
         '404':
           description: room not found
+  "/schedules":
+    get:
+      summary: Retrieves schedule list
+      tags:
+      - Schedules
+      responses:
+        '200':
+          description: schedules found
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    room_id:
+                      type: integer
+                    start_time:
+                      type: string
+                      format: date-time
+                    end_time:
+                      type: string
+                      format: date-time
+                    created_at:
+                      type: string
+                      format: date-time
+                    updated_at:
+                      type: string
+                      format: date-time
+                  required:
+                  - id
+                  - title
+                  - start_time
+                  - end_time
+                  - created_at
+                  - updated_at
+    post:
+      summary: Creates a schedule
+      tags:
+      - Schedules
+      parameters: []
+      responses:
+        '201':
+          description: schedule created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                room_id:
+                  type: integer
+                start_time:
+                  type: string
+                  format: date-time
+                end_time:
+                  type: string
+                  format: date-time
+              required:
+              - title
+              - start_time
+              - end_time
+  "/schedules/{id}":
+    get:
+      summary: Retrieves a schedule
+      tags:
+      - Schedules
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: schedule found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  title:
+                    type: string
+                  room_id:
+                    type: integer
+                  start_time:
+                    type: string
+                    format: date-time
+                  end_time:
+                    type: string
+                    format: date-time
+                  created_at:
+                    type: string
+                    format: date-time
+                  updated_at:
+                    type: string
+                    format: date-time
+        '404':
+          description: schedule not found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: object
+                    properties:
+                      code:
+                        type: integer
+                      message:
+                        type: string
+    patch:
+      summary: Updates a schedule
+      tags:
+      - Schedules
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: schedule updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                room_id:
+                  type: integer
+                start_time:
+                  type: string
+                  format: date-time
+                end_time:
+                  type: string
+                  format: date-time
+              required:
+              - title
+              - room_id
+              - start_time
+              - end_time
+    delete:
+      summary: Deletes a schedule
+      tags:
+      - Schedules
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+      responses:
+        '204':
+          description: schedule deleted
+        '404':
+          description: schedule not found
 servers:
 - url: http://{defaultHost}
   variables:
