@@ -18,19 +18,7 @@ RSpec.describe '/schedules' do
       }], summary: 'Schedule example list'
 
       response '200', 'schedules found' do
-        schema type: :array,
-               items: {
-                 properties: {
-                   id: { type: :integer },
-                   title: { type: :string },
-                   room_id: { type: :integer },
-                   start_time: { type: :string, format: :'date-time' },
-                   end_time: { type: :string, format: :'date-time' },
-                   created_at: { type: :string, format: :'date-time' },
-                   updated_at: { type: :string, format: :'date-time' }
-                 },
-                 required: %w[id title start_time end_time created_at updated_at]
-               }
+        schema type: :array, items: { '$ref' => '#/components/schemas/Schedule' }
 
         let(:schedule) { create(:schedule) }
 
@@ -42,16 +30,7 @@ RSpec.describe '/schedules' do
       tags 'Schedules'
 
       consumes 'application/json'
-      parameter name: :schedule, in: :body, schema: {
-        type: :object,
-        properties: {
-          title: { type: :string },
-          room_id: { type: :integer },
-          start_time: { type: :string, format: :'date-time' },
-          end_time: { type: :string, format: :'date-time' }
-        },
-        required: %w[title start_time end_time]
-      }
+      parameter name: :schedule, in: :body, schema: { '$ref' => '#/components/schemas/ScheduleCreate' }
 
       response '201', 'schedule created' do
         let(:room) { create(:room) }
@@ -86,16 +65,7 @@ RSpec.describe '/schedules' do
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
 
       response '200', 'schedule found' do
-        schema type: :object,
-               properties: {
-                 id: { type: :integer },
-                 title: { type: :string },
-                 room_id: { type: :integer },
-                 start_time: { type: :string, format: :'date-time' },
-                 end_time: { type: :string, format: :'date-time' },
-                 created_at: { type: :string, format: :'date-time' },
-                 updated_at: { type: :string, format: :'date-time' }
-               }
+        schema '$ref' => '#/components/schemas/Schedule'
 
         let(:id) { create(:schedule).id }
 
@@ -103,16 +73,7 @@ RSpec.describe '/schedules' do
       end
 
       response '404', 'schedule not found' do
-        schema type: :object,
-               properties: {
-                 error: {
-                   type: :object,
-                   properties: {
-                     code: { type: :integer },
-                     message: { type: :string }
-                   }
-                 }
-               }
+        schema '$ref' => '#/components/schemas/Error'
 
         let(:id) { 'unknown' }
 
@@ -126,16 +87,7 @@ RSpec.describe '/schedules' do
 
       parameter name: :id, in: :path, type: :integer
 
-      parameter name: :schedule, in: :body, schema: {
-        type: :object,
-        properties: {
-          title: { type: :string },
-          room_id: { type: :integer },
-          start_time: { type: :string, format: :'date-time' },
-          end_time: { type: :string, format: :'date-time' }
-        },
-        required: %w[title room_id start_time end_time]
-      }
+      parameter name: :schedule, in: :body, schema: { '$ref' => '#/components/schemas/ScheduleCreate' }
 
       let(:id) { create(:schedule).id }
 

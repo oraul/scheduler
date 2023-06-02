@@ -13,15 +13,7 @@ RSpec.describe '/rooms' do
 
       response '200', 'rooms found' do
         schema type: :array,
-               items: {
-                 properties: {
-                   id: { type: :integer },
-                   name: { type: :string },
-                   created_at: { type: :string, format: :'date-time' },
-                   updated_at: { type: :string, format: :'date-time' }
-                 },
-                 required: %w[id name created_at updated_at]
-               }
+               items: { '$ref' => '#/components/schemas/Room' }
 
         let(:room) { create(:room) }
 
@@ -32,13 +24,7 @@ RSpec.describe '/rooms' do
     post 'Creates a room' do
       tags 'Rooms'
       consumes 'application/json'
-      parameter name: :room, in: :body, schema: {
-        type: :object,
-        properties: {
-          name: { type: :string }
-        },
-        required: %w[name]
-      }
+      parameter name: :room, in: :body, schema: { '$ref' => '#/components/schemas/RoomCreate' }
 
       response '201', 'room created' do
         let(:room) do
@@ -71,13 +57,7 @@ RSpec.describe '/rooms' do
       request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
 
       response '200', 'room found' do
-        schema type: :object,
-               properties: {
-                 id: { type: :integer },
-                 title: { type: :string },
-                 created_at: { type: :string, format: :'date-time' },
-                 updated_at: { type: :string, format: :'date-time' }
-               }
+        schema '$ref' => '#/components/schemas/Room'
 
         let(:id) { create(:room).id }
 
@@ -85,16 +65,7 @@ RSpec.describe '/rooms' do
       end
 
       response '404', 'room not found' do
-        schema type: :object,
-               properties: {
-                 error: {
-                   type: :object,
-                   properties: {
-                     code: { type: :integer },
-                     message: { type: :string }
-                   }
-                 }
-               }
+        schema '$ref' => '#/components/schemas/Error'
 
         let(:id) { 'unknown' }
 
@@ -108,13 +79,7 @@ RSpec.describe '/rooms' do
 
       parameter name: :id, in: :path, type: :integer
 
-      parameter name: :room, in: :body, schema: {
-        type: :object,
-        properties: {
-          name: { type: :string }
-        },
-        required: %w[name]
-      }
+      parameter name: :room, in: :body, schema: { '$ref' => '#/components/schemas/RoomCreate' }
 
       let(:id) { create(:room).id }
 

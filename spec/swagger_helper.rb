@@ -31,7 +31,59 @@ RSpec.configure do |config|
             }
           }
         }
-      ]
+      ],
+      components: {
+        schemas: {
+          Error: {
+            type: 'object',
+            properties: {
+              code: { type: 'integer' },
+              message: { type: 'string' }
+            },
+            required: %w[message code]
+          },
+          Room: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              name: { type: 'string' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' }
+            },
+            required: %w[id name created_at updated_at]
+          },
+          RoomCreate: {
+            type: 'object',
+            properties: {
+              name: { type: 'string' }
+            },
+            required: %w[name]
+          },
+          Schedule: {
+            type: 'object',
+            properties: {
+              id: { type: 'integer' },
+              title: { type: 'string' },
+              room_id: { type: 'integer' },
+              start_time: { type: 'string', format: 'date-time' },
+              end_time: { type: 'string', format: 'date-time' },
+              created_at: { type: 'string', format: 'date-time' },
+              updated_at: { type: 'string', format: 'date-time' }
+            },
+            required: %w[id title start_time end_time created_at updated_at]
+          },
+          ScheduleCreate: {
+            type: 'object',
+            properties: {
+              title: { type: 'string' },
+              room_id: { type: 'integer' },
+              start_time: { type: 'string', format: 'date-time' },
+              end_time: { type: 'string', format: 'date-time' }
+            },
+            required: %w[title room_id start_time end_time]
+          }
+        }
+      }
     }
   }
 

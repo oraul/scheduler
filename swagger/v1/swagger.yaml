@@ -17,22 +17,7 @@ paths:
               schema:
                 type: array
                 items:
-                  properties:
-                    id:
-                      type: integer
-                    name:
-                      type: string
-                    created_at:
-                      type: string
-                      format: date-time
-                    updated_at:
-                      type: string
-                      format: date-time
-                  required:
-                  - id
-                  - name
-                  - created_at
-                  - updated_at
+                  "$ref": "#/components/schemas/Room"
     post:
       summary: Creates a room
       tags:
@@ -47,12 +32,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-              required:
-              - name
+              "$ref": "#/components/schemas/RoomCreate"
   "/rooms/{id}":
     get:
       summary: Retrieves a room
@@ -70,32 +50,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  title:
-                    type: string
-                  created_at:
-                    type: string
-                    format: date-time
-                  updated_at:
-                    type: string
-                    format: date-time
+                "$ref": "#/components/schemas/Room"
         '404':
           description: room not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                      message:
-                        type: string
+                "$ref": "#/components/schemas/Error"
     patch:
       summary: Updates a room
       tags:
@@ -115,12 +76,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                name:
-                  type: string
-              required:
-              - name
+              "$ref": "#/components/schemas/RoomCreate"
     delete:
       summary: Deletes a room
       tags:
@@ -149,32 +105,7 @@ paths:
               schema:
                 type: array
                 items:
-                  properties:
-                    id:
-                      type: integer
-                    title:
-                      type: string
-                    room_id:
-                      type: integer
-                    start_time:
-                      type: string
-                      format: date-time
-                    end_time:
-                      type: string
-                      format: date-time
-                    created_at:
-                      type: string
-                      format: date-time
-                    updated_at:
-                      type: string
-                      format: date-time
-                  required:
-                  - id
-                  - title
-                  - start_time
-                  - end_time
-                  - created_at
-                  - updated_at
+                  "$ref": "#/components/schemas/Schedule"
     post:
       summary: Creates a schedule
       tags:
@@ -189,22 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                room_id:
-                  type: integer
-                start_time:
-                  type: string
-                  format: date-time
-                end_time:
-                  type: string
-                  format: date-time
-              required:
-              - title
-              - start_time
-              - end_time
+              "$ref": "#/components/schemas/ScheduleCreate"
   "/schedules/{id}":
     get:
       summary: Retrieves a schedule
@@ -222,40 +138,13 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  id:
-                    type: integer
-                  title:
-                    type: string
-                  room_id:
-                    type: integer
-                  start_time:
-                    type: string
-                    format: date-time
-                  end_time:
-                    type: string
-                    format: date-time
-                  created_at:
-                    type: string
-                    format: date-time
-                  updated_at:
-                    type: string
-                    format: date-time
+                "$ref": "#/components/schemas/Schedule"
         '404':
           description: schedule not found
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  error:
-                    type: object
-                    properties:
-                      code:
-                        type: integer
-                      message:
-                        type: string
+                "$ref": "#/components/schemas/Error"
     patch:
       summary: Updates a schedule
       tags:
@@ -275,23 +164,7 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                title:
-                  type: string
-                room_id:
-                  type: integer
-                start_time:
-                  type: string
-                  format: date-time
-                end_time:
-                  type: string
-                  format: date-time
-              required:
-              - title
-              - room_id
-              - start_time
-              - end_time
+              "$ref": "#/components/schemas/ScheduleCreate"
     delete:
       summary: Deletes a schedule
       tags:
@@ -312,3 +185,86 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+      required:
+      - message
+      - code
+    Room:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - name
+      - created_at
+      - updated_at
+    RoomCreate:
+      type: object
+      properties:
+        name:
+          type: string
+      required:
+      - name
+    Schedule:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        room_id:
+          type: integer
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+        created_at:
+          type: string
+          format: date-time
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - id
+      - title
+      - start_time
+      - end_time
+      - created_at
+      - updated_at
+    ScheduleCreate:
+      type: object
+      properties:
+        title:
+          type: string
+        room_id:
+          type: integer
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+      required:
+      - title
+      - room_id
+      - start_time
+      - end_time
