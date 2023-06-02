@@ -8,9 +8,6 @@ RSpec.describe '/rooms' do
       tags 'Rooms'
       produces 'application/json'
 
-      request_body_example value: [{ id: 1, name: 'Room 1', created_at: Time.zone.now, updated_at: Time.zone.now }],
-                           summary: 'Room example list'
-
       response '200', 'rooms found' do
         schema type: :array,
                items: { '$ref' => '#/components/schemas/Room' }
@@ -53,8 +50,6 @@ RSpec.describe '/rooms' do
       tags 'Rooms'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
-
-      request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
 
       response '200', 'room found' do
         schema '$ref' => '#/components/schemas/Room'

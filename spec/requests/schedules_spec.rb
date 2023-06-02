@@ -8,15 +8,6 @@ RSpec.describe '/schedules' do
       tags 'Schedules'
       produces 'application/json'
 
-      request_body_example value: [{
-        id: 1,
-        title: 'Schedule 1',
-        start_time: Time.zone.now,
-        end_time: 1.hour.from_now,
-        created_at: Time.zone.now,
-        updated_at: Time.zone.now
-      }], summary: 'Schedule example list'
-
       response '200', 'schedules found' do
         schema type: :array, items: { '$ref' => '#/components/schemas/Schedule' }
 
@@ -61,8 +52,6 @@ RSpec.describe '/schedules' do
       tags 'Schedules'
       produces 'application/json'
       parameter name: :id, in: :path, type: :string
-
-      request_body_example value: { some_field: 'Foo' }, name: 'basic', summary: 'Request example description'
 
       response '200', 'schedule found' do
         schema '$ref' => '#/components/schemas/Schedule'
