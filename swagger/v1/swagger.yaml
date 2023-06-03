@@ -18,6 +18,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Room"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
     post:
       summary: Creates a room
       tags:
@@ -26,6 +32,8 @@ paths:
       responses:
         '201':
           description: room created
+        '401':
+          description: unauthorized
         '422':
           description: invalid request
       requestBody:
@@ -51,6 +59,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Room"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         '404':
           description: room not found
           content:
@@ -70,6 +84,8 @@ paths:
       responses:
         '200':
           description: room updated
+        '401':
+          description: unauthorized
         '422':
           description: invalid request
       requestBody:
@@ -90,6 +106,8 @@ paths:
       responses:
         '204':
           description: room deleted
+        '401':
+          description: unauthorized
         '404':
           description: room not found
   "/schedules":
@@ -106,6 +124,12 @@ paths:
                 type: array
                 items:
                   "$ref": "#/components/schemas/Schedule"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
     post:
       summary: Creates a schedule
       tags:
@@ -114,6 +138,8 @@ paths:
       responses:
         '201':
           description: schedule created
+        '401':
+          description: unauthorized
         '422':
           description: invalid request
       requestBody:
@@ -139,6 +165,12 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/Schedule"
+        '401':
+          description: unauthorized
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/Error"
         '404':
           description: schedule not found
           content:
@@ -158,6 +190,8 @@ paths:
       responses:
         '200':
           description: schedule updated
+        '401':
+          description: unauthorized
         '422':
           description: invalid request
       requestBody:
@@ -178,6 +212,8 @@ paths:
       responses:
         '204':
           description: schedule deleted
+        '401':
+          description: unauthorized
         '404':
           description: schedule not found
 servers:
@@ -185,7 +221,14 @@ servers:
   variables:
     defaultHost:
       default: localhost:3000
+security:
+- bearerAuth: []
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     Error:
       type: object

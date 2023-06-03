@@ -3,6 +3,10 @@
 require 'swagger_helper'
 
 RSpec.describe '/rooms' do
+  include AuthMock
+
+  let(:Authorization) { bearer_token_mock }
+
   path '/rooms' do
     get 'Retrieves room list' do
       tags 'Rooms'
@@ -13,6 +17,14 @@ RSpec.describe '/rooms' do
                items: { '$ref' => '#/components/schemas/Room' }
 
         let(:room) { create(:room) }
+
+        run_test!
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
 
         run_test!
       end
@@ -33,6 +45,18 @@ RSpec.describe '/rooms' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
+
+        let(:room) do
+          { name: nil }
+        end
+
+        run_test!
       end
 
       response '422', 'invalid request' do
@@ -57,6 +81,16 @@ RSpec.describe '/rooms' do
         schema '$ref' => '#/components/schemas/Room'
 
         let(:id) { create(:room).id }
+
+        run_test!
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:id) { create(:room).id }
+
+        let(:Authorization) { nil }
 
         run_test!
       end
@@ -88,6 +122,18 @@ RSpec.describe '/rooms' do
         run_test!
       end
 
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
+
+        let(:room) do
+          { name: nil }
+        end
+
+        run_test!
+      end
+
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/Error'
 
@@ -113,6 +159,16 @@ RSpec.describe '/rooms' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
+
+        let(:id) { create(:room).id }
+
+        run_test!
       end
 
       response '404', 'room not found' do

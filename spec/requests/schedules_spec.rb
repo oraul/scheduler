@@ -3,6 +3,10 @@
 require 'swagger_helper'
 
 RSpec.describe '/schedules' do
+  include AuthMock
+
+  let(:Authorization) { bearer_token_mock }
+
   path '/schedules' do
     get 'Retrieves schedule list' do
       tags 'Schedules'
@@ -12,6 +16,14 @@ RSpec.describe '/schedules' do
         schema type: :array, items: { '$ref' => '#/components/schemas/Schedule' }
 
         let(:schedule) { create(:schedule) }
+
+        run_test!
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
 
         run_test!
       end
@@ -37,6 +49,16 @@ RSpec.describe '/schedules' do
         end
       end
 
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
+
+        let(:schedule) { {} }
+
+        run_test!
+      end
+
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/Error'
 
@@ -57,6 +79,16 @@ RSpec.describe '/schedules' do
 
       response '200', 'schedule found' do
         schema '$ref' => '#/components/schemas/Schedule'
+
+        let(:id) { create(:schedule).id }
+
+        run_test!
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
 
         let(:id) { create(:schedule).id }
 
@@ -90,6 +122,16 @@ RSpec.describe '/schedules' do
         run_test!
       end
 
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
+
+        let(:schedule) { {} }
+
+        run_test!
+      end
+
       response '422', 'invalid request' do
         schema '$ref' => '#/components/schemas/Error'
 
@@ -115,6 +157,16 @@ RSpec.describe '/schedules' do
 
           assert_response_matches_metadata(example.metadata)
         end
+      end
+
+      response '401', 'unauthorized' do
+        schema '$ref' => '#/components/schemas/Error'
+
+        let(:Authorization) { nil }
+
+        let(:id) { create(:schedule).id }
+
+        run_test!
       end
 
       response '404', 'schedule not found' do

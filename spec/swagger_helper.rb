@@ -32,7 +32,17 @@ RSpec.configure do |config|
           }
         }
       ],
+      security: [
+        { bearerAuth: [] }
+      ],
       components: {
+        securitySchemes: {
+          bearerAuth: {
+            type: 'http',
+            scheme: 'bearer',
+            bearerFormat: 'JWT'
+          }
+        },
         schemas: {
           Error: {
             type: 'object',
