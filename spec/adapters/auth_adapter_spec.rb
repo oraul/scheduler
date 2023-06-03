@@ -8,7 +8,7 @@ RSpec.describe AuthAdapter do
   describe '.encode' do
     subject(:encode) { adapter.encode('token') }
 
-    it { is_expected.to be_a_kind_of(String) }
+    it { is_expected.to be_a(String) }
 
     it { expect(encode.split('.').size).to eq 3 }
   end
@@ -18,11 +18,13 @@ RSpec.describe AuthAdapter do
 
     context 'when is valid token' do
       let(:token) { adapter.encode({ foo: 'bar' }) }
+
       it { is_expected.to eq('foo' => 'bar') }
     end
 
     context 'when is invalid token' do
       let(:token) { 'invalid_token' }
+
       it { expect { decode }.to raise_error(JWT::DecodeError) }
     end
   end
