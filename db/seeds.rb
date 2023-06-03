@@ -10,9 +10,9 @@
 
 Room.insert_all(
   [
-    { name: 'Room 1', start_time: '08:00:00', end_time: '09:00:00' },
-    { name: 'Room 2', start_time: '08:00:00', end_time: '09:00:00' },
-    { name: 'Room 3', start_time: '08:00:00', end_time: '09:00:00' },
-    { name: 'Room 4', start_time: '08:00:00', end_time: '09:00:00' }
+    { name: 'Room 1', opened_at: '08:00:00', closed_at: '09:00:00' },
+    { name: 'Room 2', opened_at: '08:00:00', closed_at: '09:00:00' },
+    { name: 'Room 3', opened_at: '08:00:00', closed_at: '09:00:00' },
+    { name: 'Room 4', opened_at: '08:00:00', closed_at: '09:00:00' }
   ]
 )

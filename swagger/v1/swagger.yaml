@@ -203,10 +203,10 @@ components:
           type: integer
         name:
           type: string
-        start_time:
+        opened_at:
           type: string
           format: time
-        end_time:
+        closed_at:
           type: string
           format: time
         created_at:
@@ -218,6 +218,8 @@ components:
       required:
       - id
       - name
+      - opened_at
+      - closed_at
       - created_at
       - updated_at
     RoomCreate:
@@ -225,16 +227,16 @@ components:
       properties:
         name:
           type: string
-        start_time:
+        opened_at:
           type: string
           format: time
-        end_time:
+        closed_at:
           type: string
           format: time
       required:
       - name
-      - start_time
-      - end_time
+      - opened_at
+      - closed_at
     Schedule:
       type: object
       properties:

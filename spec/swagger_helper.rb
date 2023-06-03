@@ -47,21 +47,21 @@ RSpec.configure do |config|
             properties: {
               id: { type: 'integer' },
               name: { type: 'string' },
-              start_time: { type: 'string', format: 'time' },
-              end_time: { type: 'string', format: 'time' },
+              opened_at: { type: 'string', format: 'time' },
+              closed_at: { type: 'string', format: 'time' },
               created_at: { type: 'string', format: 'date-time' },
               updated_at: { type: 'string', format: 'date-time' }
             },
-            required: %w[id name created_at updated_at]
+            required: %w[id name opened_at closed_at created_at updated_at]
           },
           RoomCreate: {
             type: 'object',
             properties: {
               name: { type: 'string' },
-              start_time: { type: 'string', format: 'time' },
-              end_time: { type: 'string', format: 'time' }
+              opened_at: { type: 'string', format: 'time' },
+              closed_at: { type: 'string', format: 'time' }
             },
-            required: %w[name start_time end_time]
+            required: %w[name opened_at closed_at]
           },
           Schedule: {
             type: 'object',

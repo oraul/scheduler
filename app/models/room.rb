@@ -5,9 +5,9 @@ class Room < ApplicationRecord
             presence: true,
             uniqueness: { case_sensitive: false }
 
-  validates :start_time, :end_time, presence: true
+  validates :opened_at, :closed_at, presence: true
 
-  validates :start_time, comparison: { less_than: :end_time }
+  validates :opened_at, comparison: { less_than: :closed_at }
 
-  validates :end_time, comparison: { greater_than: :start_time }
+  validates :closed_at, comparison: { greater_than: :opened_at }
 end
