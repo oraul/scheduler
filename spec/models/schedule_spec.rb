@@ -9,6 +9,14 @@ RSpec.describe Schedule do
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:started_at) }
     it { is_expected.to validate_presence_of(:ended_at) }
+
+    context 'when is a committed room' do
+      subject(:committed_schedule) { create(:schedule) }
+
+      it { is_expected.not_to allow_value(schedule.room_id).for(:room_id) }
+
+      it { is_expected.to allow_value(create(:room).id).for(:room_id) }
+    end
   end
 
   describe '#time_committed?' do

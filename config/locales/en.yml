@@ -30,6 +30,11 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
+  activerecord:
+    errors:
+      messages:
+        committed: 'is committed'
+
   error:
     message:
       record_not_found: 'Record not found'
