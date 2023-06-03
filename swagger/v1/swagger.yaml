@@ -203,6 +203,12 @@ components:
           type: integer
         name:
           type: string
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
         created_at:
           type: string
           format: date-time
@@ -219,8 +225,16 @@ components:
       properties:
         name:
           type: string
+        start_time:
+          type: string
+          format: time
+        end_time:
+          type: string
+          format: time
       required:
       - name
+      - start_time
+      - end_time
     Schedule:
       type: object
       properties:

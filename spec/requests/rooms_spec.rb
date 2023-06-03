@@ -25,7 +25,7 @@ RSpec.describe '/rooms' do
 
       response '201', 'room created' do
         let(:room) do
-          { name: "Room #{Time.zone.now}" }
+          { name: "Room #{Time.zone.now}", start_time: '08:00:00', end_time: '09:00:00' }
         end
 
         it 'returns a 201 response' do |example|
