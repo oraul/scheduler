@@ -96,4 +96,8 @@ RSpec.configure do |config|
   # the key, this may want to be changed to avoid putting yaml in json files.
   # Defaults to json. Accepts ':json' and ':yaml'.
   config.swagger_format = :yaml
+
+  # By default, if response body contains undocumented properties tests will pass.
+  # To keep your responses clean and validate against a strict schema definition you can set the global config option:
+  config.swagger_strict_schema_validation = true
 end
