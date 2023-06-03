@@ -45,46 +45,27 @@ RSpec.configure do |config|
           Room: {
             type: 'object',
             properties: {
-              id: { type: 'integer' },
+              id: { type: 'integer', readOnly: true },
               name: { type: 'string' },
               opened_at: { type: 'string', format: 'time' },
               closed_at: { type: 'string', format: 'time' },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true }
             },
             required: %w[id name opened_at closed_at created_at updated_at]
-          },
-          RoomCreate: {
-            type: 'object',
-            properties: {
-              name: { type: 'string' },
-              opened_at: { type: 'string', format: 'time' },
-              closed_at: { type: 'string', format: 'time' }
-            },
-            required: %w[name opened_at closed_at]
           },
           Schedule: {
             type: 'object',
             properties: {
-              id: { type: 'integer' },
+              id: { type: 'integer', readOnly: true },
               title: { type: 'string' },
               room_id: { type: 'integer' },
               started_at: { type: 'string', format: 'date-time' },
               ended_at: { type: 'string', format: 'date-time' },
-              created_at: { type: 'string', format: 'date-time' },
-              updated_at: { type: 'string', format: 'date-time' }
+              created_at: { type: 'string', format: 'date-time', readOnly: true },
+              updated_at: { type: 'string', format: 'date-time', readOnly: true }
             },
             required: %w[id title started_at ended_at]
-          },
-          ScheduleCreate: {
-            type: 'object',
-            properties: {
-              title: { type: 'string' },
-              room_id: { type: 'integer' },
-              started_at: { type: 'string', format: 'date-time' },
-              ended_at: { type: 'string', format: 'date-time' }
-            },
-            required: %w[title room_id started_at ended_at]
           }
         }
       }

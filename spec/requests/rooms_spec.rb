@@ -21,7 +21,7 @@ RSpec.describe '/rooms' do
     post 'Creates a room' do
       tags 'Rooms'
       consumes 'application/json'
-      parameter name: :room, in: :body, schema: { '$ref' => '#/components/schemas/RoomCreate' }
+      parameter name: :room, in: :body, schema: { '$ref' => '#/components/schemas/Room' }
 
       response '201', 'room created' do
         let(:room) do
@@ -76,7 +76,7 @@ RSpec.describe '/rooms' do
 
       parameter name: :id, in: :path, type: :integer
 
-      parameter name: :room, in: :body, schema: { '$ref' => '#/components/schemas/RoomCreate' }
+      parameter name: :room, in: :body, schema: { '$ref' => '#/components/schemas/Room' }
 
       let(:id) { create(:room).id }
 

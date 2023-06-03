@@ -21,7 +21,7 @@ RSpec.describe '/schedules' do
       tags 'Schedules'
 
       consumes 'application/json'
-      parameter name: :schedule, in: :body, schema: { '$ref' => '#/components/schemas/ScheduleCreate' }
+      parameter name: :schedule, in: :body, schema: { '$ref' => '#/components/schemas/Schedule' }
 
       response '201', 'schedule created' do
         let(:room) { create(:room) }
@@ -78,7 +78,7 @@ RSpec.describe '/schedules' do
 
       parameter name: :id, in: :path, type: :integer
 
-      parameter name: :schedule, in: :body, schema: { '$ref' => '#/components/schemas/ScheduleCreate' }
+      parameter name: :schedule, in: :body, schema: { '$ref' => '#/components/schemas/Schedule' }
 
       let(:id) { create(:schedule).id }
 

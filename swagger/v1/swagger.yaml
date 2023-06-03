@@ -32,7 +32,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RoomCreate"
+              "$ref": "#/components/schemas/Room"
   "/rooms/{id}":
     get:
       summary: Retrieves a room
@@ -76,7 +76,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/RoomCreate"
+              "$ref": "#/components/schemas/Room"
     delete:
       summary: Deletes a room
       tags:
@@ -120,7 +120,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ScheduleCreate"
+              "$ref": "#/components/schemas/Schedule"
   "/schedules/{id}":
     get:
       summary: Retrieves a schedule
@@ -164,7 +164,7 @@ paths:
         content:
           application/json:
             schema:
-              "$ref": "#/components/schemas/ScheduleCreate"
+              "$ref": "#/components/schemas/Schedule"
     delete:
       summary: Deletes a schedule
       tags:
@@ -201,6 +201,7 @@ components:
       properties:
         id:
           type: integer
+          readOnly: true
         name:
           type: string
         opened_at:
@@ -212,9 +213,11 @@ components:
         created_at:
           type: string
           format: date-time
+          readOnly: true
         updated_at:
           type: string
           format: date-time
+          readOnly: true
       required:
       - id
       - name
@@ -222,26 +225,12 @@ components:
       - closed_at
       - created_at
       - updated_at
-    RoomCreate:
-      type: object
-      properties:
-        name:
-          type: string
-        opened_at:
-          type: string
-          format: time
-        closed_at:
-          type: string
-          format: time
-      required:
-      - name
-      - opened_at
-      - closed_at
     Schedule:
       type: object
       properties:
         id:
           type: integer
+          readOnly: true
         title:
           type: string
         room_id:
@@ -255,29 +244,13 @@ components:
         created_at:
           type: string
           format: date-time
+          readOnly: true
         updated_at:
           type: string
           format: date-time
+          readOnly: true
       required:
       - id
       - title
-      - started_at
-      - ended_at
-    ScheduleCreate:
-      type: object
-      properties:
-        title:
-          type: string
-        room_id:
-          type: integer
-        started_at:
-          type: string
-          format: date-time
-        ended_at:
-          type: string
-          format: date-time
-      required:
-      - title
-      - room_id
       - started_at
       - ended_at
