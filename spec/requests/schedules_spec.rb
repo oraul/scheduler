@@ -106,8 +106,10 @@ RSpec.describe '/schedules' do
       response '204', 'schedule deleted' do
         let(:id) { create(:schedule).id }
 
-        run_test! do
-          expect(Schedule.where(id:)).not_to exist
+        it 'returns a 204 response' do |example|
+          expect { submit_request(example.metadata) }.to change { Schedule.where(id:).count }.by(-1)
+
+          assert_response_matches_metadata(example.metadata)
         end
       end
 

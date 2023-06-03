@@ -104,8 +104,10 @@ RSpec.describe '/rooms' do
       response '204', 'room deleted' do
         let(:id) { create(:room).id }
 
-        run_test! do
-          expect(Room.where(id:)).not_to exist
+        it 'returns a 204 response' do |example|
+          expect { submit_request(example.metadata) }.to change { Room.where(id:).count }.by(-1)
+
+          assert_response_matches_metadata(example.metadata)
         end
       end
 
