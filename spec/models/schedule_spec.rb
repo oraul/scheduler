@@ -11,7 +11,7 @@ RSpec.describe Schedule do
     it { is_expected.to validate_presence_of(:end_time) }
   end
 
-  describe '#time_commited?' do
+  describe '#time_committed?' do
     subject(:time_commited?) { described_class.time_committed?(start_time, end_time) }
 
     context 'when it exists' do
