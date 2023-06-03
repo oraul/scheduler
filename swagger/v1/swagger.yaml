@@ -190,13 +190,12 @@ components:
     Error:
       type: object
       properties:
-        code:
-          type: integer
         message:
           type: string
+        detail:
+          type: object
       required:
       - message
-      - code
     Room:
       type: object
       properties:

@@ -22,7 +22,7 @@ class SchedulesController < ApplicationController
     if @schedule.save
       render json: @schedule, status: :created, location: @schedule
     else
-      render json: @schedule.errors, status: :unprocessable_entity
+      render json: { message: I18n.t('error.record_invalid'), detail: @schedule.errors }, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +31,7 @@ class SchedulesController < ApplicationController
     if @schedule.update(schedule_params)
       render json: @schedule
     else
-      render json: @schedule.errors, status: :unprocessable_entity
+      render json: { message: I18n.t('error.record_invalid'), detail: @schedule.errors }, status: :unprocessable_entity
     end
   end
 

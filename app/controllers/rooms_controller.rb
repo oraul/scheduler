@@ -22,7 +22,7 @@ class RoomsController < ApplicationController
     if @room.save
       render json: @room, status: :created, location: @room
     else
-      render json: @room.errors, status: :unprocessable_entity
+      render json: { message: I18n.t('error.record_invalid'), detail: @room.errors }, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +31,7 @@ class RoomsController < ApplicationController
     if @room.update(room_params)
       render json: @room
     else
-      render json: @room.errors, status: :unprocessable_entity
+      render json: { message: I18n.t('error.record_invalid'), detail: @room.errors }, status: :unprocessable_entity
     end
   end
 

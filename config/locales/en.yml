@@ -31,4 +31,6 @@
 
 en:
   error:
-    record_not_found: 'Record not found'
+    message:
+      record_not_found: 'Record not found'
+      record_invalid: 'Record invalid'

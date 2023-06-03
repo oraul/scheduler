@@ -36,6 +36,8 @@ RSpec.describe '/rooms' do
       end
 
       response '422', 'invalid request' do
+        schema '$ref' => '#/components/schemas/Error'
+
         let(:room) do
           { name: nil }
         end
@@ -87,6 +89,8 @@ RSpec.describe '/rooms' do
       end
 
       response '422', 'invalid request' do
+        schema '$ref' => '#/components/schemas/Error'
+
         let(:room) do
           { name: nil }
         end

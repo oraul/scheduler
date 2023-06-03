@@ -38,6 +38,8 @@ RSpec.describe '/schedules' do
       end
 
       response '422', 'invalid request' do
+        schema '$ref' => '#/components/schemas/Error'
+
         let(:schedule) do
           { title: nil, room_id: nil, start_time: Time.zone.now, end_time: 1.hour.from_now }
         end
@@ -89,6 +91,8 @@ RSpec.describe '/schedules' do
       end
 
       response '422', 'invalid request' do
+        schema '$ref' => '#/components/schemas/Error'
+
         let(:schedule) do
           { title: nil }
         end

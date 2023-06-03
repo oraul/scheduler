@@ -37,10 +37,10 @@ RSpec.configure do |config|
           Error: {
             type: 'object',
             properties: {
-              code: { type: 'integer' },
-              message: { type: 'string' }
+              message: { type: 'string' },
+              detail: { type: 'object' }
             },
-            required: %w[message code]
+            required: %w[message]
           },
           Room: {
             type: 'object',
