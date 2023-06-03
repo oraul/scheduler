@@ -3,15 +3,15 @@
 class Schedule < ApplicationRecord
   belongs_to :room
 
-  validates :title, :start_time, :end_time, presence: true
+  validates :title, :started_at, :ended_at, presence: true
 
-  scope :time_committed?, lambda { |start_time, end_time|
+  scope :time_committed?, lambda { |started_at, ended_at|
     where("
       tstzrange(
-        start_time,
-        end_time,
+        started_at,
+        ended_at,
         '[]'
       ) && tstzrange(?, ?, '[]')
-    ", start_time, end_time)
+    ", started_at, ended_at)
   }
 end

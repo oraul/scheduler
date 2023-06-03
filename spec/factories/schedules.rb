@@ -3,8 +3,8 @@
 FactoryBot.define do
   factory :schedule do
     title { 'MyString' }
-    start_time { Time.zone.now }
-    end_time { 1.hour.from_now }
+    started_at { Time.zone.now }
+    ended_at { 1.hour.from_now }
     room
   end
 end

@@ -244,10 +244,10 @@ components:
           type: string
         room_id:
           type: integer
-        start_time:
+        started_at:
           type: string
           format: date-time
-        end_time:
+        ended_at:
           type: string
           format: date-time
         created_at:
@@ -259,10 +259,8 @@ components:
       required:
       - id
       - title
-      - start_time
-      - end_time
-      - created_at
-      - updated_at
+      - started_at
+      - ended_at
     ScheduleCreate:
       type: object
       properties:
@@ -270,14 +268,14 @@ components:
           type: string
         room_id:
           type: integer
-        start_time:
+        started_at:
           type: string
           format: date-time
-        end_time:
+        ended_at:
           type: string
           format: date-time
       required:
       - title
       - room_id
-      - start_time
-      - end_time
+      - started_at
+      - ended_at

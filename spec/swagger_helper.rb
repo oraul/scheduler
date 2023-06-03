@@ -69,22 +69,22 @@ RSpec.configure do |config|
               id: { type: 'integer' },
               title: { type: 'string' },
               room_id: { type: 'integer' },
-              start_time: { type: 'string', format: 'date-time' },
-              end_time: { type: 'string', format: 'date-time' },
+              started_at: { type: 'string', format: 'date-time' },
+              ended_at: { type: 'string', format: 'date-time' },
               created_at: { type: 'string', format: 'date-time' },
               updated_at: { type: 'string', format: 'date-time' }
             },
-            required: %w[id title start_time end_time created_at updated_at]
+            required: %w[id title started_at ended_at]
           },
           ScheduleCreate: {
             type: 'object',
             properties: {
               title: { type: 'string' },
               room_id: { type: 'integer' },
-              start_time: { type: 'string', format: 'date-time' },
-              end_time: { type: 'string', format: 'date-time' }
+              started_at: { type: 'string', format: 'date-time' },
+              ended_at: { type: 'string', format: 'date-time' }
             },
-            required: %w[title room_id start_time end_time]
+            required: %w[title room_id started_at ended_at]
           }
         }
       }

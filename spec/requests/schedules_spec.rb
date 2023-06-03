@@ -26,8 +26,8 @@ RSpec.describe '/schedules' do
       response '201', 'schedule created' do
         let(:room) { create(:room) }
         let(:schedule) do
-          { title: "Schedule #{Time.zone.now}", room_id: room.id, start_time: Time.zone.now,
-            end_time: 1.hour.from_now }
+          { title: "Schedule #{Time.zone.now}", room_id: room.id, started_at: Time.zone.now,
+            ended_at: 1.hour.from_now }
         end
 
         it 'returns a 201 response' do |example|
@@ -41,7 +41,7 @@ RSpec.describe '/schedules' do
         schema '$ref' => '#/components/schemas/Error'
 
         let(:schedule) do
-          { title: nil, room_id: nil, start_time: Time.zone.now, end_time: 1.hour.from_now }
+          { title: nil, room_id: nil, started_at: Time.zone.now, ended_at: 1.hour.from_now }
         end
 
         run_test!
