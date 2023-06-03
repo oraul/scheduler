@@ -5,6 +5,7 @@ volumes:
 
 services:
   app:
+    env_file: ".env.development"
     build: ./
     volumes:
       - ./:/usr/src/app
