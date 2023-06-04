@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_000142) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_001802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "uuid-ossp"
@@ -31,6 +31,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_000142) do
     t.bigint "room_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.uuid "owner_id"
+    t.string "owner_name"
+    t.index ["owner_id"], name: "index_schedules_on_owner_id"
     t.index ["room_id"], name: "index_schedules_on_room_id"
   end
 

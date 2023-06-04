@@ -18,6 +18,8 @@ class SchedulesController < ApplicationController
   # POST /schedules
   def create
     @schedule = Schedule.new(schedule_params)
+    @schedule.owner_id = current_auth.sub
+    @schedule.owner_name = current_auth.name
 
     if @schedule.save
       render json: @schedule, status: :created, location: @schedule

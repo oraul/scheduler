@@ -70,6 +70,8 @@ RSpec.configure do |config|
               id: { type: 'integer', readOnly: true },
               title: { type: 'string' },
               room_id: { type: 'integer' },
+              owner_id: { type: 'string', format: 'uuid', readOnly: true },
+              owner_name: { type: 'string', readOnly: true },
               started_at: { type: 'string', format: 'date-time' },
               ended_at: { type: 'string', format: 'date-time' },
               created_at: { type: 'string', format: 'date-time', readOnly: true },
