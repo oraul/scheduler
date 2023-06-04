@@ -11,3 +11,7 @@ Style/Documentation:
 
 Rails/SkipsModelValidations:
   Enabled: false
+
+RSpec/VariableName:
+  AllowedPatterns:
+    - !ruby/regexp /^Authorization/

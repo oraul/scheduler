@@ -6,9 +6,7 @@ class ApplicationController < ActionController::API
 
   before_action :authorize_bearer_token
 
-  def current_auth
-    @current_auth
-  end
+  attr_reader :current_auth
 
   private
 
