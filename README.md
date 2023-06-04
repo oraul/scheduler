@@ -1,24 +1,58 @@
-# README
+# Scheduler
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It's a restful API for controlling your schedules on each room.
 
-Things you may want to cover:
+## System dependencies
 
-* Ruby version
+* Ruby
 
-* System dependencies
+* Rails
 
-* Configuration
+* JWT
 
-* Database creation
+* Posgresql
 
-* Database initialization
+* Swagger
 
-* How to run the test suite
+## Requirements
 
-* Services (job queues, cache servers, search engines, etc.)
+* Docker
 
-* Deployment instructions
+* Docker Compose
 
-* ...
+
+## Setup
+
+First we should initialize our database
+
+```sh
+docker compose run --rm app bin/setup
+```
+
+Now we can start our app
+
+```sh
+docker compose up
+```
+
+## Testing
+
+We've rspec and rswag testing
+
+```sh
+docker compose run --rm app bin/ci.sh
+```
+
+## Running
+
+Let's generate our dev jwt token! (It's a dev test)
+
+```sh
+docker compose run --rm app bin/rails dev:generate_jwt_token
+```
+
+Access swagger to access the application, authorize your jwt token (You can't forget to add "Bearer" before the token)
+
+```sh
+https://localhost:3000/api-docs
+```
